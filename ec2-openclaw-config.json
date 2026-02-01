@@ -1,0 +1,71 @@
+{
+  "models": {
+    "providers": {
+      "ec2-gpu": {
+        "baseUrl": "http://3.236.47.203:8000/v1",
+        "apiKey": "not-needed",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "meta-llama/Meta-Llama-3.1-70B-Instruct",
+            "name": "Llama 3.1 70B (EC2 GPU)",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 8192
+          },
+          {
+            "id": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+            "name": "Mixtral 8x22B (EC2 GPU)",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 65536,
+            "maxTokens": 4096
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ec2-gpu/meta-llama/Meta-Llama-3.1-70B-Instruct",
+        "fallbacks": [
+          "ec2-gpu/meta-llama/Meta-Llama-3.1-70B-Instruct",
+          "anthropic/claude-sonnet-4-5",
+          "amazon-bedrock/us.meta.llama3-2-3b-instruct-v1:0",
+          "ollama/llama3.2:3b"
+        ]
+      }
+    },
+    "entries": {
+      "ec2-manager": {
+        "label": "EC2 Manager",
+        "workspace": "/Users/stephenbeale/Projects/openclaw",
+        "model": {
+          "primary": "anthropic/claude-sonnet-4-5"
+        },
+        "systemPrompt": "You are the EC2 Manager agent. Your role is to manage EC2 instance lifecycle:\n\n- Start/stop instances based on workload\n- Monitor instance health and costs\n- Auto-scale based on demand\n- Manage instance types and configurations\n\nYou have AWS CLI access. Instance ID: i-0e2c7fb68a308e8e7\n\nCommands:\n- aws ec2 start-instances --instance-ids i-0e2c7fb68a308e8e7\n- aws ec2 stop-instances --instance-ids i-0e2c7fb68a308e8e7\n- aws ec2 describe-instance-status --instance-ids i-0e2c7fb68a308e8e7\n\nAlways confirm before stopping instances.",
+        "tools": {
+          "exec": true,
+          "web": {
+            "search": true,
+            "fetch": true
+          }
+        }
+      }
+    }
+  }
+}

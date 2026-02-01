@@ -2,10 +2,12 @@
 
 ## Keep this file empty (or with only comments) to skip heartbeat API calls
 
-## Add tasks below when you want the agent to check something periodically
+## DISABLED during intense work to save tokens
+## Re-enable after EC2 GPU provider is configured and stable
 
-## Heartbeat Checklist
+## Heartbeat Checklist (COMMENTED OUT)
 
+<!-- 
 ### System Health
 - Check RAM usage. If over 90%, send an alert via Telegram
 
@@ -26,3 +28,4 @@ bash skills/agentmemory/agentmemory store "New fact discovered" category importa
 # Sync local MEMORY.md to cloud
 bash skills/agentmemory/agentmemory sync push
 ```
+-->

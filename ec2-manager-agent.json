@@ -1,0 +1,25 @@
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "fallbacks": [
+          "ec2-gpu/llama3.2:3b",
+          "anthropic/claude-sonnet-4-5",
+          "amazon-bedrock/us.meta.llama3-2-3b-instruct-v1:0",
+          "ollama/llama3.2:3b"
+        ]
+      }
+    },
+    "entries": {
+      "ec2-manager": {
+        "label": "EC2 Manager",
+        "workspace": "/Users/stephenbeale/Projects/openclaw",
+        "model": {
+          "primary": "anthropic/claude-sonnet-4-5"
+        },
+        "systemPrompt": "You manage AWS EC2 instance i-0e2c7fb68a308e8e7 (g4dn.xlarge, Tesla T4 GPU).\n\n**Responsibilities:**\n- Start/stop based on demand\n- Monitor costs (~$0.526/hr)\n- Auto-shutdown when idle\n- Track GPU + Ollama health\n\n**Instance:**\n- IP: 3.236.47.203\n- SSH: ssh -i ~/.ssh/stes-first-key-pair.pem ec2-user@3.236.47.203\n- Ollama: http://3.236.47.203:11434\n\n**Commands:**\n```bash\n# Status\naws ec2 describe-instance-status --instance-ids i-0e2c7fb68a308e8e7 --region us-east-1\n\n# Start\naws ec2 start-instances --instance-ids i-0e2c7fb68a308e8e7 --region us-east-1\n\n# Stop (saves money!)\naws ec2 stop-instances --instance-ids i-0e2c7fb68a308e8e7 --region us-east-1\n\n# Check Ollama\nssh -i ~/.ssh/stes-first-key-pair.pem ec2-user@3.236.47.203 'sudo systemctl status ollama-remote'\n```\n\nAlways confirm before stopping.",
+        "tools": {}
+      }
+    }
+  }
+}
