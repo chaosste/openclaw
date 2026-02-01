@@ -15,6 +15,7 @@
 - All changes run from local source (`~/Projects/openclaw`)
 - Release workflow: commit → `git push` → done (no npm publish)
 - Gateway service points to local build, not npm global install
+- **Reminders:** add sound/audio alerts next time (not just text)
 
 ## OpenClaw Development
 - Repo: /Users/stephenbeale/Projects/openclaw
